@@ -1,0 +1,477 @@
+@import "tailwindcss";
+
+/* === BASE STYLES === */
+* {
+  border-color: rgb(229 229 229);
+}
+
+body {
+  background-color: rgb(250 250 250);
+  color: rgb(17 17 17);
+  font-family: var(--font-dm-sans), var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-weight: 450;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography classes for display headings */
+.font-display {
+  font-family: var(--font-playfair), var(--font-outfit), Georgia, serif;
+  font-feature-settings: "kern" 1;
+}
+
+/* Hide default date input placeholder text (mm/dd/yyyy) */
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: transparent !important;
+  -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit-text,
+input[type="date"]:focus::-webkit-datetime-edit-month-field,
+input[type="date"]:focus::-webkit-datetime-edit-day-field,
+input[type="date"]:focus::-webkit-datetime-edit-year-field {
+  color: rgb(26 26 26) !important;
+}
+
+/* When date has a value, show it */
+input[type="date"]:not([value=""])::-webkit-datetime-edit-text,
+input[type="date"]:not([value=""])::-webkit-datetime-edit-month-field,
+input[type="date"]:not([value=""])::-webkit-datetime-edit-day-field,
+input[type="date"]:not([value=""])::-webkit-datetime-edit-year-field,
+input[type="date"]:not(:placeholder-shown)::-webkit-datetime-edit-text,
+input[type="date"]:not(:placeholder-shown)::-webkit-datetime-edit-month-field,
+input[type="date"]:not(:placeholder-shown)::-webkit-datetime-edit-day-field,
+input[type="date"]:not(:placeholder-shown)::-webkit-datetime-edit-year-field,
+input[type="date"].has-value::-webkit-datetime-edit-text,
+input[type="date"].has-value::-webkit-datetime-edit-month-field,
+input[type="date"].has-value::-webkit-datetime-edit-day-field,
+input[type="date"].has-value::-webkit-datetime-edit-year-field {
+  color: rgb(26 26 26) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(245 245 245);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(163 163 163);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(115 115 115);
+}
+
+::selection {
+  background-color: rgb(212 175 55);
+  color: white;
+}
+
+/* === COMPONENT STYLES === */
+.glass {
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background-color: rgba(26, 26, 26, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, rgb(212 175 55), rgb(156 129 41));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-base:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(212 175 55);
+}
+
+.container-custom {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.image-overlay {
+  position: relative;
+}
+
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 10;
+}
+
+/* Floating animation */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Shine effect for premium elements */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-12deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  20%,
+  100% {
+    left: 100%;
+  }
+}
+
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* === UTILITY STYLES === */
+.text-balance {
+  text-wrap: balance;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.aspect-car {
+  aspect-ratio: 16 / 10;
+}
+
+.aspect-hero {
+  aspect-ratio: 21 / 9;
+}
+
+/* === THAI PATTERN BACKGROUNDS === */
+
+/* Light green Thai pattern background */
+.bg-thai-pattern {
+  background-color: #F0FDF4;
+  background-image: url('/images/thai-pattern-green.svg');
+  background-repeat: repeat;
+  background-size: 100px 100px;
+}
+
+/* Thai pattern with gradient overlay */
+.bg-thai-pattern-gradient {
+  background:
+    linear-gradient(180deg, rgba(240, 253, 244, 0.95) 0%, rgba(255, 255, 255, 0.98) 50%, rgba(240, 253, 244, 0.95) 100%),
+    url('/images/thai-pattern-green.svg');
+  background-repeat: repeat;
+  background-size: auto, 100px 100px;
+}
+
+/* Subtle Thai pattern for sections */
+.bg-thai-subtle {
+  background-color: #FAFAFA;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(134, 239, 172, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(74, 222, 128, 0.06) 0%, transparent 50%),
+    url('/images/thai-pattern-green.svg');
+  background-size: 100% 100%, 100% 100%, 80px 80px;
+}
+
+/* Green gradient text for light backgrounds */
+.gradient-text-green {
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 50%, #15803D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold gradient text for dark backgrounds */
+.gradient-text-light {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pure CSS Thai-inspired corner decorations */
+.thai-corner::before,
+.thai-corner::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.15;
+  background: linear-gradient(135deg, #22C55E 0%, transparent 50%);
+  border-radius: 0 0 60px 0;
+}
+
+.thai-corner::before {
+  top: 0;
+  left: 0;
+}
+
+.thai-corner::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+/* Soft green glow effect */
+.glow-green {
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.15);
+}
+
+/* Border with Thai-inspired gradient */
+.border-thai {
+  border: 1px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #BBF7D0, #86EFAC, #4ADE80) border-box;
+}
+
+/* === TEXT READABILITY ENHANCEMENTS === */
+
+/* Make neutral text colors darker for better readability */
+.text-neutral-400 {
+  color: rgb(115 115 115) !important;
+}
+
+.text-neutral-500 {
+  color: rgb(82 82 82) !important;
+}
+
+.text-neutral-600 {
+  color: rgb(64 64 64) !important;
+}
+
+.text-neutral-700 {
+  color: rgb(38 38 38) !important;
+}
+
+/* Stronger body text */
+.text-body-sm,
+.text-body-md,
+.text-body-lg {
+  font-weight: 450;
+}
+
+/* Ensure headings are bold and visible - EXCEPT on dark backgrounds */
+h1:not(.text-white),
+h2:not(.text-white),
+h3:not(.text-white),
+h4:not(.text-white),
+h5:not(.text-white),
+h6:not(.text-white),
+.font-display:not(.text-white) {
+  font-weight: 600;
+}
+
+/* Better contrast for description text - EXCEPT white text */
+p:not(.text-white):not([class*="text-white"]):not([class*="text-neutral-2"]):not([class*="text-neutral-3"]) {
+  line-height: 1.7;
+}
+
+/* Make captions more visible */
+.text-caption {
+  color: rgb(82 82 82) !important;
+  font-weight: 500;
+}
+
+/* PRESERVE white text on dark backgrounds */
+.text-white,
+[class*="text-white"] {
+  color: white !important;
+}
+
+/* Preserve light text on Hero/Footer sections */
+footer p,
+footer span,
+section[class*="bg-dark"] p,
+section[class*="bg-dark"] span {
+  color: inherit;
+}
+
+/* === NUMBER FONT STYLING === */
+
+/* Use tabular numbers for aligned, clean number display */
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Numbers should be bold and clear */
+.tracking-wide,
+[class*="text-2xl"],
+[class*="text-3xl"],
+[class*="text-4xl"],
+[class*="text-5xl"],
+[class*="text-display"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Phone numbers styling */
+a[href^="tel:"],
+[class*="tracking-wide"] {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Price and stat numbers */
+.font-bold,
+.font-semibold {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Make numbers in display text extra bold */
+.text-display-sm,
+.text-display-md,
+.text-display-lg {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* === MARQUEE ANIMATION === */
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+.marquee-content span {
+  flex-shrink: 0;
+  padding-right: 4rem;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}

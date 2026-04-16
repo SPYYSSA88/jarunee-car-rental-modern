@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3A5F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FCD34D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16A34A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Thai pattern decoration -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#F59E0B" stroke-width="2"/>
+    <circle cx="1100" cy="530" r="80" fill="none" stroke="#F59E0B" stroke-width="2"/>
+    <circle cx="200" cy="500" r="40" fill="none" stroke="#22C55E" stroke-width="1"/>
+    <circle cx="1000" cy="130" r="40" fill="none" stroke="#22C55E" stroke-width="1"/>
+  </g>
+  
+  <!-- Logo Icon -->
+  <rect x="100" y="200" width="120" height="120" rx="24" fill="url(#goldGrad)"/>
+  <text x="160" y="290" font-family="Georgia, serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">J</text>
+  
+  <!-- Brand Name -->
+  <text x="250" y="255" font-family="Georgia, serif" font-size="56" font-weight="bold" fill="white">Jarunee</text>
+  <text x="250" y="300" font-family="Arial, sans-serif" font-size="24" fill="#A1A1A1" letter-spacing="8">CAR RENTAL</text>
+  
+  <!-- Main Heading -->
+  <text x="100" y="420" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">บริการเช่ารถ แท็กซี่เหมา</text>
+  <text x="100" y="480" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#greenGrad)">เชียงใหม่ 24 ชั่วโมง</text>
+  
+  <!-- Contact -->
+  <rect x="100" y="530" width="200" height="50" rx="25" fill="url(#greenGrad)"/>
+  <text x="200" y="562" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">📞 089-437-6117</text>
+  
+  <!-- Price Badge -->
+  <rect x="950" y="250" width="200" height="130" rx="16" fill="white" opacity="0.1"/>
+  <text x="1050" y="300" font-family="Arial, sans-serif" font-size="18" fill="#A1A1A1" text-anchor="middle">ราคาเริ่มต้น</text>
+  <text x="1050" y="350" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle">฿10</text>
+  <text x="1050" y="375" font-family="Arial, sans-serif" font-size="16" fill="#A1A1A1" text-anchor="middle">/กิโลเมตร</text>
+  
+  <!-- Decorative line -->
+  <rect x="100" y="350" width="400" height="4" rx="2" fill="url(#goldGrad)" opacity="0.5"/>
+</svg>

@@ -1,0 +1,46 @@
+{
+    "name": "Jarunee Car Rental - บริการเช่ารถเชียงใหม่",
+    "short_name": "Jarunee Car",
+    "description": "บริการเช่ารถและแท็กซี่เหมาจังหวัดเชียงใหม่ พร้อมให้บริการ 24 ชั่วโมง",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#1E3A5F",
+    "orientation": "portrait-primary",
+    "lang": "th",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-192.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/icon-512.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        }
+    ],
+    "categories": [
+        "transportation",
+        "travel",
+        "lifestyle"
+    ],
+    "shortcuts": [
+        {
+            "name": "โทรเลย",
+            "url": "tel:+66894376117",
+            "description": "โทรหา Jarunee Car Rental"
+        },
+        {
+            "name": "แอดไลน์",
+            "url": "https://line.me/ti/p/~0894376117",
+            "description": "ติดต่อผ่าน LINE"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://jaruneecarrental.com/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="th" href="https://jaruneecarrental.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jaruneecarrental.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://jaruneecarrental.com/zh/" />
+  </url>
+
+  <!-- Our Fleet / Cars -->
+  <url>
+    <loc>https://jaruneecarrental.com/cars</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://jaruneecarrental.com/#contact</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Location / Map -->
+  <url>
+    <loc>https://jaruneecarrental.com/#location</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
