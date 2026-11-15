@@ -87,9 +87,10 @@ export default function YouTubeSection() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <motion.span
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                         className="inline-block px-4 py-2 bg-red-100 rounded-full text-red-600 font-semibold text-sm mb-4"
                     >
                         {getBadge()}
@@ -97,8 +98,8 @@ export default function YouTubeSection() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                         className="font-display text-display-md md:text-display-lg text-dark-900 mb-4"
                     >
                         {getTitle()} <span className="gradient-text">{getTitleHighlight()}</span>
@@ -106,8 +107,8 @@ export default function YouTubeSection() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
                         className="text-body-lg text-neutral-600 max-w-2xl mx-auto"
                     >
                         {getDescription()}
@@ -116,10 +117,10 @@ export default function YouTubeSection() {
 
                 {/* YouTube Video Embed */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
+                    initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 1.05, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="max-w-4xl mx-auto"
                 >
                     <div className="relative aspect-video rounded-2xl overflow-hidden shadow-strong bg-dark-900">

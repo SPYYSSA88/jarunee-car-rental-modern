@@ -1,5 +1,23 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === 'production';
+
+const cspDirectives = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "img-src 'self' data: https: blob:",
+  "font-src 'self' https://fonts.gstatic.com",
+  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com",
+  "frame-src 'self' https://www.youtube.com https://www.google.com",
+  "media-src 'self' https:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+  ...(isProd ? ["upgrade-insecure-requests"] : []),
+];
+
 const securityHeaders = [
   {
     // ป้องกัน XSS (Cross-Site Scripting)
@@ -29,27 +47,17 @@ const securityHeaders = [
   {
     // Content Security Policy - ป้องกัน XSS และ injection attacks
     key: 'Content-Security-Policy',
-    value: [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "img-src 'self' data: https: blob:",
-      "font-src 'self' https://fonts.gstatic.com",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com",
-      "frame-src 'self' https://www.youtube.com https://www.google.com",
-      "media-src 'self' https:",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "frame-ancestors 'self'",
-      "upgrade-insecure-requests"
-    ].join('; ')
+    value: cspDirectives.join('; ')
   },
-  {
-    // บังคับใช้ HTTPS (สำหรับ production)
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains'
-  }
+  ...(isProd
+    ? [
+        {
+          // บังคับใช้ HTTPS (สำหรับ production)
+          key: 'Strict-Transport-Security',
+          value: 'max-age=31536000; includeSubDomains'
+        }
+      ]
+    : []),
 ];
 
 const nextConfig: NextConfig = {
@@ -59,6 +67,12 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'flagcdn.com',
         port: '',
         pathname: '/**',
       },

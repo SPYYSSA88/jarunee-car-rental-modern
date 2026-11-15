@@ -13,9 +13,10 @@ export default function MapSection() {
             <div className="container-custom">
                 {/* Contact Buttons - At the top */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-16 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto"
                 >
                     {/* Phone Button */}
@@ -57,9 +58,10 @@ export default function MapSection() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <motion.span
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                         className="inline-block px-4 py-2 bg-blue-100 rounded-full text-blue-600 font-semibold text-sm mb-4"
                     >
                         {t('map.badge')}
@@ -67,8 +69,8 @@ export default function MapSection() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                         className="font-display text-display-md md:text-display-lg text-dark-900 mb-4"
                     >
                         {t('map.title')} <span className="gradient-text">{t('map.titleHighlight')}</span>
@@ -76,8 +78,8 @@ export default function MapSection() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
                         className="text-body-lg text-neutral-600 max-w-2xl mx-auto"
                     >
                         {t('map.description')}
@@ -86,11 +88,11 @@ export default function MapSection() {
 
                 {/* Map Container */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="relative rounded-2xl overflow-hidden shadow-strong"
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 1.05, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative rounded-2xl overflow-hidden shadow-xl"
                 >
                     {/* Google Maps Embed - Chiang Mai Airport Area */}
                     <iframe
@@ -105,13 +107,13 @@ export default function MapSection() {
                         className="w-full"
                     />
 
-                    {/* Info Card Overlay */}
+                    {/* Info Card Overlay (stacks cleanly below map on mobile, floats on desktop) */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                        className="absolute left-6 bottom-6 bg-white rounded-xl shadow-strong p-6 max-w-sm"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="bg-white md:rounded-xl shadow-xl p-5 md:p-6 md:max-w-sm md:absolute md:left-6 md:bottom-6 border-t md:border border-neutral-100"
                     >
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">

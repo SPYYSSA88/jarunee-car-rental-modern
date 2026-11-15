@@ -40,13 +40,13 @@ export default function TrustBadges() {
                         return (
                             <motion.div
                                 key={badge.id}
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={{ opacity: 0, y: 16 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.5 }}
-                                className="flex items-center gap-3 w-[45%] md:w-auto"
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ delay: index * 0.12, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+                                className="flex items-center gap-3 w-[45%] md:w-auto group"
                             >
-                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center shrink-0 border border-primary-100">
+                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center shrink-0 border border-primary-100 transition-transform duration-500 ease-out group-hover:scale-105">
                                     <Icon className="w-5 h-5 md:w-6 md:h-6" />
                                 </div>
                                 <div>

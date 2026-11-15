@@ -21,10 +21,31 @@ interface FilterState {
     fuel: string[];
 }
 
+function sortVehicles(list: typeof vehicles, sortType: string) {
+    const sorted = [...list];
+    switch (sortType) {
+        case 'price-low':
+            sorted.sort((a, b) => a.pricePerDay - b.pricePerDay);
+            break;
+        case 'price-high':
+            sorted.sort((a, b) => b.pricePerDay - a.pricePerDay);
+            break;
+        case 'rating':
+            sorted.sort((a, b) => b.rating - a.rating);
+            break;
+        case 'popular':
+            sorted.sort((a, b) => b.reviews - a.reviews);
+            break;
+        default:
+            break;
+    }
+    return sorted;
+}
+
 export default function CarsPage() {
     const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
     const [sortBy, setSortBy] = React.useState('popular');
-    const [filteredVehicles, setFilteredVehicles] = React.useState(vehicles);
+    const [filteredVehicles, setFilteredVehicles] = React.useState(() => sortVehicles(vehicles, 'popular'));
 
     const handleFilterChange = (filters: FilterState) => {
         let filtered = [...vehicles];
@@ -57,31 +78,12 @@ export default function CarsPage() {
             filtered = filtered.filter(v => filters.fuel.includes(v.fuel));
         }
 
-        setFilteredVehicles(filtered);
+        setFilteredVehicles(sortVehicles(filtered, sortBy));
     };
 
     const handleSort = (sortType: string) => {
         setSortBy(sortType);
-        const sorted = [...filteredVehicles];
-
-        switch (sortType) {
-            case 'price-low':
-                sorted.sort((a, b) => a.pricePerDay - b.pricePerDay);
-                break;
-            case 'price-high':
-                sorted.sort((a, b) => b.pricePerDay - a.pricePerDay);
-                break;
-            case 'rating':
-                sorted.sort((a, b) => b.rating - a.rating);
-                break;
-            case 'popular':
-                sorted.sort((a, b) => b.reviews - a.reviews);
-                break;
-            default:
-                break;
-        }
-
-        setFilteredVehicles(sorted);
+        setFilteredVehicles(prev => sortVehicles(prev, sortType));
     };
 
     return (
@@ -92,14 +94,15 @@ export default function CarsPage() {
                 <div className="bg-gradient-premium py-16">
                     <div className="container-custom">
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 22 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-center text-dark-900"
+                            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                            className="text-center text-white"
                         >
                             <h1 className="font-display text-display-md md:text-display-lg mb-4">
                                 Our Premium Fleet
                             </h1>
-                            <p className="text-body-lg text-neutral-600 max-w-2xl mx-auto">
+                            <p className="text-body-lg text-neutral-200 max-w-2xl mx-auto">
                                 Choose from our extensive collection of luxury vehicles. Every car is meticulously maintained and ready for your journey.
                             </p>
                         </motion.div>

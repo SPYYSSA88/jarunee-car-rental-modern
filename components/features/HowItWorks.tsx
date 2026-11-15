@@ -58,9 +58,10 @@ export default function HowItWorks() {
             <div className="container-custom">
                 {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
                     className="text-center max-w-2xl mx-auto mb-16"
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 text-sm font-medium mb-4">
@@ -80,18 +81,18 @@ export default function HowItWorks() {
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 26 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white rounded-xl md:rounded-2xl p-3 md:p-6 shadow-md md:shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.95, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                            className="group bg-white rounded-xl md:rounded-2xl p-3 md:p-6 shadow-md md:shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-700 ease-out hover:-translate-y-1.5 active:scale-[0.99]"
                         >
                             {/* Header with number and icon */}
                             <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
-                                <div className={`w-8 h-8 md:w-12 md:h-12 ${step.color} rounded-lg md:rounded-xl flex items-center justify-center shadow-sm md:shadow-lg shrink-0`}>
+                                <div className={`w-8 h-8 md:w-12 md:h-12 ${step.color} rounded-lg md:rounded-xl flex items-center justify-center shadow-sm md:shadow-lg shrink-0 transition-transform duration-500 ease-out group-hover:scale-105`}>
                                     <step.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
                                 </div>
-                                <span className="text-2xl md:text-4xl font-bold text-slate-200">
+                                <span className="text-2xl md:text-4xl font-bold text-slate-200 transition-colors duration-500 group-hover:text-slate-300">
                                     {step.number}
                                 </span>
                             </div>

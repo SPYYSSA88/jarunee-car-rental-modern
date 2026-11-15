@@ -89,48 +89,56 @@ export default function SmartContactFAB() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
+                        exit={{ opacity: 0, y: 14 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                         className="flex flex-col items-end gap-3 mb-4"
                     >
-                        {options.map((opt, index) => (
-                            <motion.a
-                                key={opt.id}
-                                href={opt.href}
-                                target={opt.id !== 'phone' ? '_blank' : '_self'}
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ delay: index * 0.05 }}
-                                className={`flex items-center gap-3 group`}
-                            >
-                                <span className="bg-white/90 backdrop-blur shadow-md px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                    {opt.label}
-                                </span>
-                                <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 active:scale-95 ${opt.bgColor} ${opt.hoverColor}`}>
-                                    {opt.icon}
-                                </div>
-                            </motion.a>
-                        ))}
+                        {options.map((opt, index) => {
+                            const isPlaceholder = opt.href === '#';
+                            return (
+                                <motion.a
+                                    key={opt.id}
+                                    href={opt.href}
+                                    target={!isPlaceholder && opt.id !== 'phone' ? '_blank' : undefined}
+                                    rel={!isPlaceholder && opt.id !== 'phone' ? 'noopener noreferrer' : undefined}
+                                    onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
+                                    initial={{ opacity: 0, y: 12, scale: 0.94 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                                    transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                                    className="flex items-center gap-3 group"
+                                >
+                                    <span className="bg-white/95 backdrop-blur shadow-md px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-400 whitespace-nowrap">
+                                        {opt.label}
+                                    </span>
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform duration-500 ease-out hover:scale-105 active:scale-95 ${opt.bgColor} ${opt.hoverColor}`}>
+                                        {opt.icon}
+                                    </div>
+                                </motion.a>
+                            );
+                        })}
                     </motion.div>
                 )}
             </AnimatePresence>
 
             {/* Main Toggle Button */}
             <div className="relative">
-                {/* Tooltip hint when closed */}
+                {/* Tooltip hint when closed - gentle continuous float */}
                 {!isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 2, repeat: Infinity, repeatType: 'reverse', duration: 2 }}
-                        className="absolute right-16 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur shadow-md px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 whitespace-nowrap hidden sm:block pointer-events-none"
+                        initial={{ opacity: 0, x: 8 }}
+                        animate={{ opacity: 1, x: [0, -5, 0] }}
+                        transition={{
+                            opacity: { duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] },
+                            x: { duration: 4.5, delay: 1.2, ease: 'easeInOut', repeat: Infinity },
+                        }}
+                        className="absolute right-16 top-1/2 -translate-y-1/2 bg-white/95 backdrop-blur shadow-md px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 whitespace-nowrap hidden sm:block pointer-events-none"
                     >
                         {t.help}
                         {/* Triangle tip */}
-                        <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white/90 rotate-45" />
+                        <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white/95 rotate-45" />
                     </motion.div>
                 )}
 
@@ -138,7 +146,8 @@ export default function SmartContactFAB() {
                     onClick={toggleFAB}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-14 h-14 bg-gradient-to-tr from-primary-600 to-primary-500 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(30,58,95,0.4)] text-white hover:shadow-[0_8px_25px_rgba(30,58,95,0.5)] transition-shadow relative z-10"
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="w-14 h-14 bg-gradient-to-tr from-primary-600 to-primary-500 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(30,58,95,0.4)] text-white hover:shadow-[0_8px_25px_rgba(30,58,95,0.5)] transition-shadow duration-500 relative z-10"
                 >
                     <AnimatePresence mode="popLayout">
                         {isOpen ? (
@@ -147,7 +156,7 @@ export default function SmartContactFAB() {
                                 initial={{ rotate: -90, opacity: 0 }}
                                 animate={{ rotate: 0, opacity: 1 }}
                                 exit={{ rotate: 90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
+                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                             >
                                 <X className="w-6 h-6" />
                             </motion.div>
@@ -157,12 +166,12 @@ export default function SmartContactFAB() {
                                 initial={{ rotate: 90, opacity: 0 }}
                                 animate={{ rotate: 0, opacity: 1 }}
                                 exit={{ rotate: -90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
+                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                                 className="relative"
                             >
                                 <HeadphonesIcon className="w-7 h-7" />
                                 {/* Pulsing rings */}
-                                <span className="absolute -inset-1 rounded-full border border-white/50 animate-ping" style={{ animationDuration: '3s' }}></span>
+                                <span className="absolute -inset-1 rounded-full border border-white/50 animate-ping" style={{ animationDuration: '3.8s' }}></span>
                             </motion.div>
                         )}
                     </AnimatePresence>

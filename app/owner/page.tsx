@@ -8,7 +8,6 @@ import {
     Phone,
     MapPin,
     Car,
-    CreditCard,
     Shield,
     Clock,
     Star,
@@ -93,13 +92,14 @@ export default function OwnerPage() {
                     <div className="container-custom px-3 sm:px-4">
                         {/* Back Button */}
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: -16 }}
                             animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                             className="mb-6 sm:mb-8"
                         >
                             <Link
                                 href="/"
-                                className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/20 px-3 sm:px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all"
+                                className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/20 px-3 sm:px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all duration-500"
                             >
                                 <ArrowLeft className="w-4 h-4" />
                                 <span className="text-xs sm:text-sm">{t('owner.backHome')}</span>
@@ -108,18 +108,20 @@ export default function OwnerPage() {
 
                         {/* Main Profile Card - Glassmorphism */}
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 26 }}
                             animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.05, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                             className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-10 mb-4 sm:mb-6 shadow-2xl"
                         >
                             <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
                                 {/* Large Profile Image */}
                                 <div className="relative shrink-0">
-                                    <div className="w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl sm:rounded-3xl overflow-hidden border-4 border-primary-500 shadow-2xl shadow-primary-500/30">
+                                    <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl sm:rounded-3xl overflow-hidden border-4 border-primary-500 shadow-2xl shadow-primary-500/30">
                                         <Image
                                             src="/images/owner-profile.jpg"
                                             alt={getName()}
                                             fill
+                                            sizes="(max-width: 640px) 144px, (max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
                                             className="object-cover object-top"
                                         />
                                     </div>

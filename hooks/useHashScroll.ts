@@ -12,34 +12,55 @@ export function useHashScroll() {
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        // Get the hash from the URL
-        const hash = window.location.hash;
+        const timeoutIds: Array<ReturnType<typeof setTimeout>> = [];
 
-        if (hash) {
-            // Remove the # symbol
-            const id = hash.replace('#', '');
+        const runHashScroll = () => {
+            // Clear any pending retries before starting a new scroll sequence
+            while (timeoutIds.length > 0) {
+                const id = timeoutIds.pop();
+                if (id) clearTimeout(id);
+            }
 
-            // Wait a bit for the page to fully render
-            const scrollToElement = () => {
-                const element = document.getElementById(id);
+            const hash = window.location.hash;
+            if (!hash) return;
+
+            const targetId = hash.replace('#', '');
+            if (!targetId) return;
+
+            const tryScroll = (): boolean => {
+                const element = document.getElementById(targetId);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    return true;
                 }
+                return false;
             };
 
-            // Try immediately
-            scrollToElement();
+            if (tryScroll()) return;
 
-            // Also try after a short delay (for dynamically loaded content)
-            const timeoutId = setTimeout(scrollToElement, 100);
+            // Retry across loading boundaries (including HomePage 750ms suspense delay)
+            for (const delay of [100, 350, 850, 1200]) {
+                const timer = setTimeout(() => {
+                    if (tryScroll()) {
+                        while (timeoutIds.length > 0) {
+                            const id = timeoutIds.pop();
+                            if (id) clearTimeout(id);
+                        }
+                    }
+                }, delay);
+                timeoutIds.push(timer);
+            }
+        };
 
-            // And again after a longer delay for safety
-            const timeoutId2 = setTimeout(scrollToElement, 500);
+        runHashScroll();
+        window.addEventListener('hashchange', runHashScroll);
 
-            return () => {
-                clearTimeout(timeoutId);
-                clearTimeout(timeoutId2);
-            };
-        }
+        return () => {
+            window.removeEventListener('hashchange', runHashScroll);
+            while (timeoutIds.length > 0) {
+                const id = timeoutIds.pop();
+                if (id) clearTimeout(id);
+            }
+        };
     }, [pathname, searchParams]);
 }

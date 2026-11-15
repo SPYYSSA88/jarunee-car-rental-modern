@@ -30,9 +30,10 @@ export default function ContactSection() {
             <div className="container-custom relative z-10">
                 {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
                     className="text-center mb-16"
                 >
                     <span className="inline-block px-4 py-2 bg-primary-100 border border-primary-200 rounded-full text-primary-700 font-bold text-sm mb-4">
@@ -49,23 +50,26 @@ export default function ContactSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     {/* Left: Contact Cards */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
                         className="space-y-4"
                     >
                         {/* Phone Card */}
                         <motion.a
                             href="tel:0894376117"
-                            whileHover={{ scale: 1.02 }}
-                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-primary-200 transition-all group"
+                            whileHover={{ y: -3, scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-primary-200 transition-shadow duration-500 group"
                         >
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
                                 <Phone className="w-8 h-8 text-white" />
                             </div>
                             <div>
                                 <p className="text-neutral-500 text-sm font-medium mb-1">{t('contact.phone')}</p>
-                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-primary-600 transition-colors">
+                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-primary-600 transition-colors duration-400">
                                     089-437-6117
                                 </p>
                             </div>
@@ -76,15 +80,17 @@ export default function ContactSection() {
                             href="https://line.me/ti/p/~0894376117"
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ scale: 1.02 }}
-                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-green-200 transition-all group"
+                            whileHover={{ y: -3, scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-green-200 transition-shadow duration-500 group"
                         >
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
                                 <MessageCircle className="w-8 h-8 text-white" />
                             </div>
                             <div>
                                 <p className="text-neutral-500 text-sm font-medium mb-1">LINE</p>
-                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-green-600 transition-colors">
+                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-green-600 transition-colors duration-400">
                                     089-437-6117
                                 </p>
                             </div>
@@ -95,8 +101,10 @@ export default function ContactSection() {
                             href="https://api.whatsapp.com/send/?phone=%2B66894376117&text&type=phone_number&app_absent=0"
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ scale: 1.02 }}
-                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-emerald-200 transition-all group"
+                            whileHover={{ y: -3, scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                            className="flex items-center gap-5 p-6 bg-white rounded-2xl shadow-lg border border-neutral-100 hover:shadow-xl hover:border-emerald-200 transition-shadow duration-500 group"
                         >
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg">
                                 <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -105,7 +113,7 @@ export default function ContactSection() {
                             </div>
                             <div>
                                 <p className="text-neutral-500 text-sm font-medium mb-1">{t('contact.whatsapp')}</p>
-                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-emerald-600 transition-colors">
+                                <p className="text-dark-900 font-bold text-2xl tracking-wide group-hover:text-emerald-600 transition-colors duration-400">
                                     +66 89-437-6117
                                 </p>
                             </div>
@@ -127,9 +135,10 @@ export default function ContactSection() {
 
                     {/* Right: LINE QR Code */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{ duration: 1.0, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
                         className="flex justify-center"
                     >
                         <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-neutral-100 text-center max-w-sm">

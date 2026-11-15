@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useSyncExternalStore, ReactNode } from 'react';
 
 export type Language = 'th' | 'en' | 'cn';
 
@@ -1071,24 +1071,54 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-    // ใช้ callback function ใน useState
-    // บน Client อ่านจาก localStorage, บน Server return 'th'
-    const [language, setLanguageState] = useState<Language>(() => {
-        if (typeof window === 'undefined') {
-            return 'th';
-        }
-        const savedLang = localStorage.getItem('language') as Language;
+let memoryLanguage: Language = 'th';
+const LANGUAGE_STORAGE_EVENT = 'jarunee-language-change';
+
+function subscribeLanguage(callback: () => void) {
+    if (typeof window === 'undefined') {
+        return () => {};
+    }
+    window.addEventListener('storage', callback);
+    window.addEventListener(LANGUAGE_STORAGE_EVENT, callback);
+    return () => {
+        window.removeEventListener('storage', callback);
+        window.removeEventListener(LANGUAGE_STORAGE_EVENT, callback);
+    };
+}
+
+function getLanguageSnapshot(): Language {
+    try {
+        const savedLang = localStorage.getItem('language') as Language | null;
         if (savedLang && ['th', 'en', 'cn'].includes(savedLang)) {
+            memoryLanguage = savedLang;
             return savedLang;
         }
-        return 'th';
-    });
+    } catch {
+        // Fallback to in-memory state if localStorage is unavailable
+    }
+    return memoryLanguage;
+}
+
+function getServerLanguageSnapshot(): Language {
+    return 'th';
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+    const language = useSyncExternalStore(
+        subscribeLanguage,
+        getLanguageSnapshot,
+        getServerLanguageSnapshot
+    );
 
     const setLanguage = (lang: Language) => {
-        setLanguageState(lang);
+        memoryLanguage = lang;
         if (typeof window !== 'undefined') {
-            localStorage.setItem('language', lang);
+            try {
+                localStorage.setItem('language', lang);
+            } catch {
+                // Ignore storage errors
+            }
+            window.dispatchEvent(new Event(LANGUAGE_STORAGE_EVENT));
         }
     };
 

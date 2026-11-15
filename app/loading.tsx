@@ -140,25 +140,25 @@ export default function Loading() {
                 }
 
                 .animate-spin-slow {
-                    animation: spin-slow 3s linear infinite;
+                    animation: spin-slow 7s linear infinite;
                 }
                 .animate-spin-reverse {
-                    animation: spin-reverse 4s linear infinite;
+                    animation: spin-reverse 9s linear infinite;
                 }
                 .animate-spin-orbit {
-                    animation: spin-orbit 3s linear infinite;
+                    animation: spin-orbit 7s linear infinite;
                 }
                 .animate-pulse-glow {
-                    animation: pulse-glow 2s ease-in-out infinite;
+                    animation: pulse-glow 3.5s ease-in-out infinite;
                 }
                 .animate-loading-bar {
-                    animation: loading-bar 2s ease-in-out infinite;
+                    animation: loading-bar 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
                 }
                 .animate-float-slow {
-                    animation: float-slow 8s ease-in-out infinite;
+                    animation: float-slow 14s ease-in-out infinite;
                 }
                 .animate-float-reverse {
-                    animation: float-reverse 10s ease-in-out infinite;
+                    animation: float-reverse 16s ease-in-out infinite;
                 }
             `}</style>
         </div>

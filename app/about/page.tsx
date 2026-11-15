@@ -79,7 +79,7 @@ export default function AboutPage() {
             <main className="min-h-screen bg-thai-subtle">
                 {/* Hero Section */}
                 <section className="relative bg-gradient-premium py-20 md:py-28 overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5" />
+                    <div className="absolute inset-0 bg-[url('/images/thai-pattern-green.svg')] opacity-5" />
                     <div className="container-custom relative z-10">
                         <div className="max-w-4xl mx-auto text-center text-white">
                             <span className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium mb-6">

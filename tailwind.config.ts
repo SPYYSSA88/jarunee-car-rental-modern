@@ -55,11 +55,11 @@ const config: Config = {
                 },
             },
             fontFamily: {
-                sans: ['var(--font-dm-sans)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
-                display: ['var(--font-playfair)', 'var(--font-outfit)', 'Georgia', 'serif'],
-                body: ['var(--font-dm-sans)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
-                kanit: ['var(--font-kanit)', 'sans-serif'],
-                sarabun: ['var(--font-sarabun)', 'sans-serif'],
+                sans: ['var(--font-dm-sans)', 'var(--font-inter)', 'var(--font-noto-thai)', 'system-ui', 'sans-serif'],
+                display: ['var(--font-outfit)', 'var(--font-kanit)', 'var(--font-noto-thai)', 'system-ui', 'sans-serif'],
+                body: ['var(--font-dm-sans)', 'var(--font-inter)', 'var(--font-noto-thai)', 'system-ui', 'sans-serif'],
+                kanit: ['var(--font-dm-sans)', 'var(--font-kanit)', 'var(--font-noto-thai)', 'sans-serif'],
+                sarabun: ['var(--font-sarabun)', 'var(--font-noto-thai)', 'sans-serif'],
             },
             fontSize: {
                 'display-lg': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],

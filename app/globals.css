@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* === BASE STYLES === */
 * {
@@ -8,11 +9,12 @@
 body {
   background-color: rgb(250 250 250);
   color: rgb(17 17 17);
-  font-family: var(--font-dm-sans), var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), var(--font-inter), var(--font-noto-thai), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-weight: 450;
+  overflow-x: clip;
 }
 
 html {
@@ -21,7 +23,7 @@ html {
 
 /* Typography classes for display headings */
 .font-display {
-  font-family: var(--font-playfair), var(--font-outfit), Georgia, serif;
+  font-family: var(--font-outfit), var(--font-kanit), var(--font-noto-thai), system-ui, sans-serif;
   font-feature-settings: "kern" 1;
 }
 
@@ -117,12 +119,13 @@ input[type="date"].has-value::-webkit-datetime-edit-year-field {
 }
 
 .hover-lift {
-  transition: all 0.3s ease;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
 }
 
 .btn-base {
@@ -131,7 +134,7 @@ input[type="date"].has-value::-webkit-datetime-edit-year-field {
   justify-content: center;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .btn-base:disabled {
@@ -178,24 +181,25 @@ input[type="date"].has-value::-webkit-datetime-edit-year-field {
   z-index: 10;
 }
 
-/* Floating animation */
+/* Floating animation - slow & silky smooth */
 .floating {
-  animation: floating 3s ease-in-out infinite;
+  animation: floating 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
 }
 
 @keyframes floating {
 
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0px, 0);
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translate3d(0, -8px, 0);
   }
 }
 
-/* Shine effect for premium elements */
+/* Shine effect for premium elements - slow graceful sweep */
 .shine {
   position: relative;
   overflow: hidden;
@@ -205,22 +209,38 @@ input[type="date"].has-value::-webkit-datetime-edit-year-field {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 50%;
+  left: -120%;
+  width: 55%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: skewX(-12deg);
-  animation: shine 3s infinite;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.24), transparent);
+  transform: skewX(-16deg);
+  animation: shine 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 @keyframes shine {
   0% {
-    left: -100%;
+    left: -120%;
   }
 
-  20%,
+  35%,
   100% {
-    left: 100%;
+    left: 130%;
+  }
+}
+
+/* Subtle breathing green glow for Hero highlight text */
+.hero-green-glow {
+  animation: heroGreenGlow 5.5s ease-in-out infinite;
+}
+
+@keyframes heroGreenGlow {
+  0%,
+  100% {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 0 22px rgba(0, 204, 0, 0.22);
+  }
+
+  50% {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.65), 0 0 34px rgba(0, 225, 0, 0.42);
   }
 }
 
@@ -384,14 +404,13 @@ p:not(.text-white):not([class*="text-white"]):not([class*="text-neutral-2"]):not
 }
 
 /* Make captions more visible */
-.text-caption {
+.text-caption:not(.text-white) {
   color: rgb(82 82 82) !important;
   font-weight: 500;
 }
 
 /* PRESERVE white text on dark backgrounds */
-.text-white,
-[class*="text-white"] {
+.text-white {
   color: white !important;
 }
 
@@ -453,7 +472,7 @@ a[href^="tel:"],
 .marquee-content {
   display: flex;
   width: max-content;
-  animation: marquee 25s linear infinite;
+  animation: marquee 48s linear infinite;
   will-change: transform;
 }
 
@@ -464,14 +483,28 @@ a[href^="tel:"],
 
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
-.marquee-container:hover .marquee-content {
+.marquee-container:hover .marquee-content,
+.marquee-container:active .marquee-content {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .floating,
+  .shine::before,
+  .hero-green-glow,
+  .marquee-content {
+    animation: none !important;
+  }
 }

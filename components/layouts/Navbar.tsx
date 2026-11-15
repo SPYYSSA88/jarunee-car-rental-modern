@@ -3,9 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, HelpCircle } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { Button, buttonVariants } from '@/components/ui/Button';
 import { cn } from '@/lib/utils/cn';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
@@ -37,10 +37,11 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
+                initial={{ y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 className={cn(
-                    'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+                    'fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out',
                     isScrolled
                         ? 'glass shadow-medium'
                         : 'bg-transparent'
@@ -48,13 +49,14 @@ export default function Navbar() {
             >
                 <div className="container-custom">
                     <div className={cn(
-                        "flex items-center justify-between transition-all duration-300",
+                        "flex items-center justify-between transition-all duration-500 ease-out",
                         isScrolled ? 'h-16' : 'h-20'
                     )}>
                         {/* Logo */}
                         <Link href="/" className="flex items-center group">
                             <motion.div
-                                whileHover={{ scale: 1.05 }}
+                                whileHover={{ scale: 1.03 }}
+                                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                                 className="relative"
                             >
                                 <Image
@@ -63,7 +65,7 @@ export default function Navbar() {
                                     width={150}
                                     height={48}
                                     className={cn(
-                                        "transition-all duration-300 w-auto",
+                                        "transition-all duration-500 ease-out w-auto",
                                         isScrolled ? 'h-10' : 'h-12'
                                     )}
                                     priority
@@ -77,10 +79,10 @@ export default function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-dark-900 hover:text-primary-500 font-medium transition-colors relative group"
+                                    className="text-dark-900 hover:text-primary-500 font-medium transition-colors duration-400 relative group"
                                 >
                                     {link.label}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full" />
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-500 ease-out group-hover:w-full" />
                                 </Link>
                             ))}
                         </div>
@@ -122,60 +124,66 @@ export default function Navbar() {
             </motion.nav>
 
             {/* Mobile Menu */}
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                    opacity: isMobileMenuOpen ? 1 : 0,
-                    y: isMobileMenuOpen ? 0 : -20,
-                }}
-                className={cn(
-                    'fixed inset-0 z-40 bg-white md:hidden transition-all duration-300',
-                    isMobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
-                )}
-                style={{ top: '80px' }}
-            >
-                <div className="container-custom py-8 flex flex-col space-y-6">
-                    {navLinks.map((link, index) => (
-                        <motion.div
-                            key={link.href}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{
-                                opacity: isMobileMenuOpen ? 1 : 0,
-                                x: isMobileMenuOpen ? 0 : -20,
-                            }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <Link
-                                href={link.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-2xl font-display font-semibold text-dark-900 hover:text-primary-500 transition-colors block"
-                            >
-                                {link.label}
-                            </Link>
-                        </motion.div>
-                    ))}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl md:hidden overflow-y-auto"
+                        style={{ top: isScrolled ? '64px' : '80px' }}
+                    >
+                        <div className="container-custom py-8 flex flex-col space-y-6">
+                            {navLinks.map((link, index) => (
+                                <motion.div
+                                    key={link.href}
+                                    initial={{ opacity: 0, x: -16 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="text-2xl font-display font-semibold text-dark-900 hover:text-primary-500 transition-colors duration-300 block"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </motion.div>
+                            ))}
 
-                    <div className="pt-8 space-y-4 border-t border-neutral-200">
-                        <Button
-                            variant="ghost"
-                            size="lg"
-                            fullWidth
-                            className="gap-2 justify-start"
-                            onClick={() => {
-                                setIsMobileMenuOpen(false);
-                                setIsFAQOpen(true);
-                            }}
-                        >
-                            <HelpCircle className="w-5 h-5" />
-                            {t('nav.faq')}
-                        </Button>
-                        <Button variant="ghost" size="lg" fullWidth className="gap-2 justify-start">
-                            <Phone className="w-5 h-5" />
-                            {t('nav.phone')}
-                        </Button>
-                    </div>
-                </div>
-            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                                className="pt-8 space-y-4 border-t border-neutral-200"
+                            >
+                                <Button
+                                    variant="ghost"
+                                    size="lg"
+                                    fullWidth
+                                    className="gap-2 justify-start"
+                                    onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setIsFAQOpen(true);
+                                    }}
+                                >
+                                    <HelpCircle className="w-5 h-5" />
+                                    {t('nav.faq')}
+                                </Button>
+                                <a
+                                    href="tel:+66894376117"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className={buttonVariants({ variant: 'ghost', size: 'lg', fullWidth: true, className: 'gap-2 justify-start' })}
+                                >
+                                    <Phone className="w-5 h-5" />
+                                    {t('nav.phone')}
+                                </a>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Spacer for fixed navbar */}
             <div className="h-20" />

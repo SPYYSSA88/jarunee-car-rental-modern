@@ -64,7 +64,7 @@ const SUSPICIOUS_PATHS = [
     '/api/admin',
 ];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
     const pathname = request.nextUrl.pathname.toLowerCase();
     const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';

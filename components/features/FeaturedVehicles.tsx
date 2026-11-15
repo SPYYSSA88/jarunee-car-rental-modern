@@ -24,9 +24,10 @@ export default function FeaturedVehicles() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                     <div>
                         <motion.span
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 18 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                             className="inline-block px-4 py-2 bg-primary-100 rounded-full text-primary-600 font-semibold text-sm mb-4"
                         >
                             {t('featured.badge')}
@@ -34,8 +35,8 @@ export default function FeaturedVehicles() {
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                             className="font-display text-display-md md:text-display-lg text-dark-900 mb-4"
                         >
                             {t('featured.title')} <span className="gradient-text">{t('featured.titleHighlight')}</span>
@@ -43,8 +44,8 @@ export default function FeaturedVehicles() {
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.95, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
                             className="text-body-lg text-neutral-600 max-w-2xl"
                         >
                             {t('featured.description')}

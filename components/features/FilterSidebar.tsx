@@ -222,17 +222,15 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
     });
 
     const toggleArrayFilter = useCallback((key: keyof FilterState, value: string) => {
-        setFilters(prevFilters => {
-            const currentArray = prevFilters[key] as string[];
-            const newArray = currentArray.includes(value)
-                ? currentArray.filter(v => v !== value)
-                : [...currentArray, value];
+        const currentArray = filters[key] as string[];
+        const newArray = currentArray.includes(value)
+            ? currentArray.filter(v => v !== value)
+            : [...currentArray, value];
 
-            const newFilters = { ...prevFilters, [key]: newArray };
-            onFilterChange?.(newFilters);
-            return newFilters;
-        });
-    }, [onFilterChange]);
+        const newFilters = { ...filters, [key]: newArray };
+        setFilters(newFilters);
+        onFilterChange?.(newFilters);
+    }, [filters, onFilterChange]);
 
     const clearFilters = useCallback(() => {
         const resetFilters: FilterState = {
@@ -248,6 +246,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
     }, [onFilterChange]);
 
     const activeFiltersCount =
+        (filters.priceRange[1] < 8000 ? 1 : 0) +
         filters.brands.length +
         filters.types.length +
         filters.fuel.length +
@@ -257,7 +256,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
     return (
         <>
             {/* Mobile Filter Button */}
-            <div className="lg:hidden fixed bottom-6 right-6 z-40">
+            <div className="lg:hidden fixed bottom-6 left-6 z-40">
                 <Button
                     variant="premium"
                     size="lg"
@@ -295,6 +294,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                             onClick={() => setIsMobileOpen(false)}
                             className="fixed inset-0 bg-dark-900/50 backdrop-blur-sm z-40 lg:hidden"
                         />
@@ -304,7 +304,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                             className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 overflow-y-auto lg:hidden"
                         >
                             <div className="sticky top-0 bg-white border-b border-neutral-200 p-4 flex items-center justify-between z-10">

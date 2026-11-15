@@ -66,9 +66,10 @@ export default function TouristSpots() {
                 {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                         className="inline-block px-4 py-2 bg-primary-100 rounded-full text-primary-600 font-semibold text-sm mb-4"
                     >
                         {t('tourist.badge')}
@@ -76,8 +77,8 @@ export default function TouristSpots() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                         className="font-display text-display-md md:text-display-lg text-dark-900 mb-4"
                     >
                         {t('tourist.title')} <span className="gradient-text">{t('tourist.titleHighlight')}</span>
@@ -85,8 +86,8 @@ export default function TouristSpots() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
                         className="text-body-lg text-neutral-600 max-w-2xl mx-auto"
                     >
                         {t('tourist.description')}
@@ -101,11 +102,11 @@ export default function TouristSpots() {
                             href={spot.mapUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 26 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group relative overflow-hidden rounded-xl md:rounded-2xl shadow-soft hover:shadow-strong transition-all duration-500 cursor-pointer block"
+                            viewport={{ once: true, amount: 0.12 }}
+                            transition={{ duration: 0.95, delay: (index % 3) * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                            className="group relative overflow-hidden rounded-xl md:rounded-2xl shadow-soft hover:shadow-xl hover:-translate-y-1 active:scale-[0.99] transition-all duration-700 ease-out cursor-pointer block"
                         >
                             {/* Image */}
                             <div className="aspect-[4/5] object-cover md:aspect-[4/3] overflow-hidden relative">
@@ -114,7 +115,7 @@ export default function TouristSpots() {
                                     alt={spot.name}
                                     fill
                                     sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                    className="object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
                                 />
                             </div>
 

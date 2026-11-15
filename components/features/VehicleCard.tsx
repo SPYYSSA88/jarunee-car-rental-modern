@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Users, Fuel, Gauge, Star, Heart } from 'lucide-react';
-import { Button, buttonVariants } from '@/components/ui/Button';
+import { buttonVariants } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -22,19 +22,20 @@ export default function VehicleCard({ vehicle, index = 0 }: VehicleCardProps) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, amount: 0.12 }}
+            transition={{ duration: 0.95, delay: (index % 4) * 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className="h-full"
         >
-            <Card hover padding="none" className="group overflow-hidden h-full flex flex-col">
+            <Card hover padding="none" className="group overflow-hidden h-full flex flex-col active:scale-[0.99]">
                 {/* Image Section */}
                 <div className="relative aspect-car overflow-hidden bg-neutral-100">
                     <Image
                         src={vehicle.image}
                         alt={`${vehicle.brand} ${vehicle.model}`}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
 
@@ -60,9 +61,12 @@ export default function VehicleCard({ vehicle, index = 0 }: VehicleCardProps) {
 
                     {/* Quick View Overlay - Hidden on mobile (no hover) */}
                     <div className="hidden md:flex absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-                        <Button variant="premium" size="md" className="shine">
+                        <Link
+                            href={`/cars/${vehicle.id}`}
+                            className={buttonVariants({ variant: 'premium', size: 'md', className: 'shine' })}
+                        >
                             {t('featured.quickView')}
-                        </Button>
+                        </Link>
                     </div>
 
                     {/* Availability Badge */}

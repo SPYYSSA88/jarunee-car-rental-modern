@@ -89,9 +89,10 @@ export default function FAQSection() {
             <div className="container-custom max-w-4xl">
                 <div className="text-center mb-12">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
+                        initial={{ opacity: 0, scale: 0.94, y: 12 }}
+                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                         className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600 mb-4"
                     >
                         <HelpCircle className="w-6 h-6" />
@@ -99,7 +100,8 @@ export default function FAQSection() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-dark-900 mb-4"
                     >
                         {content.title}
@@ -107,8 +109,8 @@ export default function FAQSection() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.95, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         className="text-neutral-600 md:text-lg"
                     >
                         {content.subtitle}
@@ -121,9 +123,9 @@ export default function FAQSection() {
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="border border-neutral-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.85, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                            className="border border-neutral-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-500"
                         >
                             <button
                                 onClick={() => toggleFaq(index)}
@@ -131,18 +133,19 @@ export default function FAQSection() {
                             >
                                 <h3 className="font-bold text-dark-900 text-base md:text-lg pr-8">{faq.q}</h3>
                                 <ChevronDown
-                                    className={`w-6 h-6 text-primary-500 shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}
+                                    className={`w-6 h-6 text-primary-500 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${openIndex === index ? 'rotate-180' : ''}`}
                                 />
                             </button>
-                            <AnimatePresence>
+                            <AnimatePresence initial={false}>
                                 {openIndex === index && (
                                     <motion.div
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                        className="overflow-hidden"
                                     >
-                                        <div className="px-5 md:px-6 pb-6 pt-0 text-slate-600 leading-relaxed border-t border-neutral-100 mt-2 pt-4">
+                                        <div className="px-5 md:px-6 pb-6 text-slate-600 leading-relaxed border-t border-neutral-100 mt-2 pt-4">
                                             {faq.a.split('**').map((part, i) => (
                                                 i % 2 === 1 ? <strong key={i} className="text-primary-700">{part}</strong> : part
                                             ))}
